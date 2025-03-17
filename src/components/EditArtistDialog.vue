@@ -68,13 +68,13 @@
   // Use a reactive object to hold both name and genre
   const newData = reactive({ ...props.initialData });
   
-  // Sync dialog open/close state with parent
+  // why dooes this work??
   watch(
     () => props.modelValue,
     (newVal) => {
       internalVisible.value = newVal;
       if (newVal) {
-        // Reset the reactive object when the dialog opens
+        // ??
         Object.assign(newData, props.initialData);
       }
     }
