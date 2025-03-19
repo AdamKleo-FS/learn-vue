@@ -1,12 +1,10 @@
 <template>
     <ArtistForm />
-    <ArtistList />
+    <ArtistTable />
 </template>
 
 <script setup>
-    import ArtistList from '@/components/ArtistList.vue';
     import ArtistForm from '@/components/ArtistForm.vue';
-
-
+    import ArtistTable from '@/components/ArtistTable.vue';
 </script>
 

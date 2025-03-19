@@ -13,7 +13,6 @@ const headers = [
 
 <template>
   <v-container>
-    <h2>Artist List</h2>
     <v-data-table
       :headers="headers"
       :items="artists"

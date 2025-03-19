@@ -1,7 +1,6 @@
 // artistsStore.js
 import { defineStore } from 'pinia';
-import { ref } from 'vue';
-import { createArtist } from '@/models/artistModel';
+
 
 // Helper function for common field validation
 function validateArtistFields(artist) {
@@ -17,52 +16,48 @@ function validateArtistFields(artist) {
   return ""; // empty string means validation passed
 }
 
-export const useArtistsStore = defineStore('artists', () => {
-  const artists = ref([
-    createArtist({ id: 1, name: 'Taylor Swift', genre: 'Pop' }),
-    createArtist({ id: 2, name: 'The Beatles', genre: 'Rock' }),
-    createArtist({ id: 3, name: 'Beyoncé', genre: 'R&B/Pop' }),
-    createArtist({ id: 4, name: 'Metallica', genre: 'Metal' })
-  ]);
+export const useArtistsStore = defineStore('artists', {
+    state: () => ({
+        // Define your state properties here
+        artists: [],
+        selectedArtists: [] // Include the selectedArtists ref here
+      }),
 
-  const selectedArtists = ref([]);
+  actions: {
+    addArtist(artistData) {
+      // Validate common fields
+      const error = validateArtistFields(artistData);
+      if (error) {
+        console.error(error);
+        return;
+      }
 
-  const addArtist = (artistData) => {
-    // Validate common fields
-    const error = validateArtistFields(artistData);
-    if (error) {
-      console.error(error);
-      return;
+      this.artists.push(artistData);
+    },
+
+    removeArtist(id) {
+      this.artists = this.artists.filter(artist => artist.id !== id);
+    },
+
+    deleteSelectedArtists() {
+      this.artists = this.artists.filter(
+        artist => !this.selectedArtists.includes(artist.id)
+      );
+      this.selectedArtists = [];
+    },
+
+    updateArtist(updatedArtist) {
+      // Validate common fields
+      const error = validateArtistFields(updatedArtist);
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      const index = this.artists.findIndex(artist => artist.id === updatedArtist.id);
+      if (index !== -1) {
+        this.artists[index] = updatedArtist;
+      }
     }
-    const newArtist = createArtist(artistData);
-
-    artists.value.push(newArtist);
-  };
-
-  const removeArtist = (id) => {
-    artists.value = artists.value.filter(artist => artist.id !== id);
-  };
-
-  const deleteSelectedArtists = () => {
-    artists.value = artists.value.filter(
-      artist => !selectedArtists.value.includes(artist.id)
-    );
-    selectedArtists.value = [];
-  };
-
-  const updateArtist = (updatedArtist) => {
-    // Validate common fields
-    const error = validateArtistFields(updatedArtist);
-    if (error) {
-      console.error(error);
-      return;
-    }
-
-    const index = artists.value.findIndex(artist => artist.id === updatedArtist.id);
-    if (index !== -1) {
-      artists.value[index] = updatedArtist;
-    }
-  };
-
-  return { artists, selectedArtists, addArtist, removeArtist, deleteSelectedArtists, updateArtist };
+  }
 });

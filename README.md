@@ -4,8 +4,9 @@ Exercise 1: A view that displays a list of all the artists that have been create
 
 ## Progress
 - Exercise 1 Arists :white_check_mark:
-- Exercise 1 Albums :hourglass_flowing_sand: Loading...
-- Exercise 2
+- Exercise 1 Albums :white_check_mark:
 
 ## Improvements
+- Exercise 1 is not done well. Make reusable components for displaying the data and getting the data
+- Use what was learned in exercise 2 to imrpove exercise 1 
 - Better validation in exercise 1 fields

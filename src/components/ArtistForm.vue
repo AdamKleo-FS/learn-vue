@@ -18,17 +18,17 @@ const newArtist = reactive({
 const editDialog = ref(false);
 const editedArtist = ref(null);
 
-// Compute the initial data for the edit dialog (both name and genre)
+// !explain this later!
 const editedArtistData = computed(() => {
   return editedArtist.value
     ? { name: editedArtist.value.name, genre: editedArtist.value.genre }
     : { name: '', genre: '' };
 });
 
-``` Methods for adding, deleting, and editing artists ```
+
 const onAddClick = () => {
   // Pass the whole object to the store method
-  artistsStore.addArtist({ name: newArtist.name, genre: newArtist.genre });
+  artistsStore.addArtist({ id: Date.now, name: newArtist.name, genre: newArtist.genre });
   // Reset the model
   newArtist.name = '';
   newArtist.genre = '';
@@ -75,7 +75,6 @@ const onCancelEdit = () => {
 
 <template>
   <v-container>
-    <h2>Add Artist</h2>
     <v-form @submit.prevent="onAddClick">
       <v-text-field v-model="newArtist.name" label="Artist Name" />
       <v-select
