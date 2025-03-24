@@ -1,26 +1,3 @@
-<template>
-  <v-container>
-    <v-form @submit.prevent="onAddClick">
-      <v-text-field v-model="newAlbum.title" label="Album Title" />
-
-      <v-select
-        v-model="newAlbum.artistId"
-        label="Artist"
-        :items="artistOptions"
-        item-text="name"
-        item-value="id"
-        outlined
-      />
-
-      <v-row align="center" justify="center" class="mt-4">
-        <v-col cols="auto">
-          <v-btn type="submit" icon="mdi-plus" size="small"></v-btn>
-        </v-col>
-      </v-row>
-    </v-form>
-  </v-container>
-</template>
-
 <script setup>
 import { reactive, computed } from 'vue'
 import { useAlbumsStore } from '@/stores/albumsStore'
@@ -60,3 +37,29 @@ const onAddClick = () => {
   newAlbum.artistId = null
 }
 </script>
+
+
+<template>
+  <v-container>
+    <v-form @submit.prevent="onAddClick">
+      <v-text-field v-model="newAlbum.title" label="Album Title" />
+
+      <v-select
+        v-model="newAlbum.artistId"
+        label="Artist"
+        :items="artistOptions"
+        item-text="name"
+        item-value="id"
+        outlined
+      />
+
+      <v-row align="center" justify="center" class="mt-4">
+        <v-col cols="auto">
+          <v-btn type="submit" icon="mdi-plus" size="small"></v-btn>
+        </v-col>
+      </v-row>
+    </v-form>
+  </v-container>
+</template>
+
+

@@ -1,6 +1,6 @@
 
 <script setup>
-import { ref, reactive, watch, defineProps, defineEmits } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import { useArtistsStore } from '@/stores/artistsStore'
 import { storeToRefs } from 'pinia'
 

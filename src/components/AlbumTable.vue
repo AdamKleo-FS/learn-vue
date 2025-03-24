@@ -1,31 +1,3 @@
-<template>
-  <v-container>
-    <v-data-table
-      :headers="headers"
-      :items="tableAlbums"
-      show-select
-      v-model="selectedAlbums"
-      item-value="id"
-    />
-
-    <v-row align="center" justify="center" class="mt-4">
-      <v-col cols="auto">
-        <v-btn icon="mdi-delete" size="small" @click="onDeleteClick"></v-btn>
-      </v-col>
-      <v-col cols="auto">
-        <v-btn icon="mdi-open-in-new" size="small" @click="onEditClick"></v-btn>
-      </v-col>
-    </v-row>
-
-    <EditAlbumDialog
-      v-model="editDialog"
-      :initialData="editedAlbumData"
-      @confirm="onConfirmEdit"
-      @cancel="onCancelEdit"
-    />
-  </v-container>
-</template>
-
 <script setup>
 import { ref, computed } from 'vue'
 import { useAlbumsStore } from '@/stores/albumsStore'
@@ -110,3 +82,34 @@ const onCancelEdit = () => {
   editedAlbum.value = null
 }
 </script>
+
+
+
+<template>
+  <v-container>
+    <v-data-table
+      :headers="headers"
+      :items="tableAlbums"
+      show-select
+      v-model="selectedAlbums"
+      item-value="id"
+    />
+
+    <v-row align="center" justify="center" class="mt-4">
+      <v-col cols="auto">
+        <v-btn icon="mdi-delete" size="small" @click="onDeleteClick"></v-btn>
+      </v-col>
+      <v-col cols="auto">
+        <v-btn icon="mdi-open-in-new" size="small" @click="onEditClick"></v-btn>
+      </v-col>
+    </v-row>
+
+    <EditAlbumDialog
+      v-model="editDialog"
+      :initialData="editedAlbumData"
+      @confirm="onConfirmEdit"
+      @cancel="onCancelEdit"
+    />
+  </v-container>
+</template>
+

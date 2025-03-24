@@ -1,3 +1,40 @@
+<template>
+  <v-container>
+    <v-form @submit.prevent="onAddClick">
+      <v-text-field v-model="newArtist.name" label="Artist Name" />
+      <v-select
+        v-model="newArtist.genre"
+        label="Genre"
+        :items="['Rock', 'Pop', 'Jazz', 'Hip-Hop', 'Classical']"
+        outlined
+        />
+
+      <v-row align="center" justify="center">
+        <v-col cols="auto">
+          <v-btn type="submit" icon="mdi-plus" size="small"></v-btn>
+        </v-col>
+        <v-col cols="auto">
+          <v-btn icon="mdi-delete" size="small" @click="onDeleteClick"></v-btn>
+        </v-col>
+        <v-col cols="auto">
+          <v-btn icon="mdi-open-in-new" size="small" @click="onEditClick"></v-btn>
+        </v-col>
+      </v-row>
+    </v-form>
+
+    <!-- Edit Artist Dialog now expects initialData with both name and genre -->
+    <EditArtistDialog
+      v-model="editDialog"
+      :initialData="editedArtistData"
+      @confirm="onConfirmEdit"
+      @cancel="onCancelEdit"
+    />
+  </v-container>
+</template>
+
+
+
+
 <script setup>
 import { reactive, ref, computed } from 'vue';
 import { useArtistsStore } from '@/stores/artistsStore';
@@ -73,36 +110,3 @@ const onCancelEdit = () => {
 };
 </script>
 
-<template>
-  <v-container>
-    <v-form @submit.prevent="onAddClick">
-      <v-text-field v-model="newArtist.name" label="Artist Name" />
-      <v-select
-        v-model="newArtist.genre"
-        label="Genre"
-        :items="['Rock', 'Pop', 'Jazz', 'Hip-Hop', 'Classical']"
-        outlined
-        />
-
-      <v-row align="center" justify="center">
-        <v-col cols="auto">
-          <v-btn type="submit" icon="mdi-plus" size="small"></v-btn>
-        </v-col>
-        <v-col cols="auto">
-          <v-btn icon="mdi-delete" size="small" @click="onDeleteClick"></v-btn>
-        </v-col>
-        <v-col cols="auto">
-          <v-btn icon="mdi-open-in-new" size="small" @click="onEditClick"></v-btn>
-        </v-col>
-      </v-row>
-    </v-form>
-
-    <!-- Edit Artist Dialog now expects initialData with both name and genre -->
-    <EditArtistDialog
-      v-model="editDialog"
-      :initialData="editedArtistData"
-      @confirm="onConfirmEdit"
-      @cancel="onCancelEdit"
-    />
-  </v-container>
-</template>
